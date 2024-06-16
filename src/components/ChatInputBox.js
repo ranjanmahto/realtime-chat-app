@@ -1,39 +1,73 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EmojiPicker from 'emoji-picker-react'
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useSelector } from 'react-redux';
+import upload from '../firebase/upload';
+
 
 
 const ChatInputBox = () => {
 
     const [EmojiClicked , setEmojiClicked]= useState(false);
     const [Message,setMessage]= useState("");
-    const {chatId}= useSelector((store)=>store.chat)
+    const {chatId,user,isReceiverBlocked, isCurrentUserBlocked}= useSelector((store)=>store.chat)
+    
     const {userDetails}= useSelector((store)=>store.user)
+    const [media,setMedia]= useState({
+      file:null,
+      url:null,
+    })
+    useEffect(()=>{
+
+    },[isReceiverBlocked])
+
+    const handleMedia= (e)=>{
+      if(e.target.files[0])
+        {
+          setMedia({
+            file:e.target.files[0],
+            url: URL.createObjectURL(e.target.files[0]),
+          })
+        }
+    }
     const handleEmojiClicked= (e)=>{
-        console.log(e);
+
+
+       
         setMessage(Message+ e.emoji);
     }
-    const handleSend= async()=>{
-      if(Message==="")
+    const handleSend= async(e)=>{
+      e.preventDefault();
+      if(Message==="" && media.url==null )
         {
           return;
         }
+        let imgURL= null;
 
-        try{
+        try
+        {
+          if(media.file)
+            {
+              imgURL= await upload(media.file);
+            }
               await updateDoc(doc(db,"chats",chatId),{
-                messages:arrayUnion({
+                messages:arrayUnion(
+                  {
                   senderId:userDetails.id,
                   text:Message,
                   createdAt:new Date(),
+                  ...(imgURL && {img:imgURL})
 
                 })
 
 
               });
 
-              const UserIDs= [userDetails.id,chatId];
+             
+
+              const UserIDs= [userDetails?.id,user?.id];
+            
               UserIDs.forEach(async(id)=>{
 
                 const userChatsRef= doc(db,"userChats",id);
@@ -47,8 +81,8 @@ const ChatInputBox = () => {
                       (c)=>c.chatId=== chatId
                     );
 
-                    userChatsData.chats[chatIndex].lastMessage= Message;
-                    userChatsData.chats[chatIndex].isSeen=  (id=== chatId?false:true);
+                    userChatsData.chats[chatIndex].lastMessage= (media.url?"Image"+(Message?Message:""):Message);
+                    userChatsData.chats[chatIndex].isSeen=  (id=== user?.id?false:true);
                     userChatsData.chats[chatIndex].updatedAt= Date.now();
                     await updateDoc(userChatsRef,{
                       chats:userChatsData.chats
@@ -58,21 +92,52 @@ const ChatInputBox = () => {
                  
                   
 
-              })
+              });
+
+              setMedia({
+                file:null,
+                url:null,
+              });
+              setMessage("");
+
               
         }
         catch(err)
         {
+          
           console.log(err)
         }
     }
+
+
+    if(isReceiverBlocked || isCurrentUserBlocked)
+      {
+        {console.log("no chats")}
+        return (
+          
+          <div className="border-t-gray-400 p-2  px-3 flex justify-center items-center " >
+
+               <p className='text-lg text-gray-600' >You Can't Send any Message</p>
+              
+          </div>
+        )
+      }
+      console.log("yes chats")
   return (
-    <div className=" flex justify-between items-center border border-t-gray-400 p-2   px-3 ">
+    
+
+    
+    <form className=" flex justify-between items-center border border-t-gray-400 p-2   px-3 "  onSubmit={handleSend}>
              
-             <div className="flex gap-5" >
-                    <i class="fa-solid fa-image "></i>
-                    <i class="fa-solid fa-camera"></i>
-                    <i class="fa-solid fa-microphone"></i>
+             <div className="flex gap-5 items-baseline" >
+             <i class="fa-solid fa-camera cursor-pointer"  ></i>
+             <i class="fa-solid fa-microphone cursor-pointer"></i>
+                    <label htmlFor='file'>
+                    <i class="fa-solid fa-image cursor-pointer "></i>
+                    </label>
+                   
+                    
+                    <input type='file' id='file' style={{display:"none"}} onChange={handleMedia} />
              </div>
 
              <input type='text' placeholder='Type your message' value={Message} onChange={(e)=>{
@@ -92,7 +157,7 @@ const ChatInputBox = () => {
                 Send
              </button>
 
-    </div>
+    </form>
   )
 }
 

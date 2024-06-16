@@ -1,10 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ChatContainer from './ChatContainer'
 import ChatInputBox from './ChatInputBox'
+import MoreOptions from './MoreOptions'
+import { useSelector } from 'react-redux'
+
+
 
 const ChatMessage = () => {
+  const {showMoreOption}= useSelector((store)=>store.display)
+  
+  console.log(showMoreOption);
+  useEffect(()=>{
+
+  },[showMoreOption])
+ 
   return (
     <div className="w-[100%] h-[90%] bg-slate-200 flex flex-col justify-end relative " >
+
+           {showMoreOption && <MoreOptions/>}
 
           <ChatContainer/>
           <ChatInputBox/>

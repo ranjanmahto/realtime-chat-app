@@ -20,7 +20,7 @@ const userSlice= createSlice({
            
            state.isLoading= loading;
 
-          console.log("ranjan")
+         
                 
         }
     }

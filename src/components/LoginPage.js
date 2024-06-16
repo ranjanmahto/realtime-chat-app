@@ -20,7 +20,7 @@ const LoginPage = () => {
     url:"",
   })
   const handleProfileUpload=(e)=>{
-    console.log(e);
+   
     if(e.target.files[0])
       {
              setImage({
@@ -39,7 +39,7 @@ const LoginPage = () => {
         setLoading(true);
         const user= await createUserWithEmailAndPassword(auth, email.current.value, password.current.value);
         const imgURL= await upload(image.file);
-        console.log(imgURL);
+       
 
 
         
@@ -62,7 +62,7 @@ const LoginPage = () => {
        }
        catch(err)
        {
-         console.log(err.message);
+        
          toast.error(err.message);
        }
        finally{

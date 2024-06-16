@@ -20,9 +20,9 @@ const ChatPage = () => {
                   <SecondSection/>
                   {chatId && 
                     
-                         <>
-                         {console.log("third section")}
-                         <ThirdSection/></>
+                         
+                        
+                         <ThirdSection/>
                    
                   }
             

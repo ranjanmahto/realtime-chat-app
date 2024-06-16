@@ -18,19 +18,18 @@ const AddUser = () => {
             const q=query(userRef,where("name","==",name.current.value));
             
             const querySnapshot= await getDocs(q);
-            console.log(q);
-            console.log(3)
+           
             
 
             if(!querySnapshot.empty)
                 {
-                    console.log(querySnapshot.docs[0].data())
+                   
                    setUser(querySnapshot.docs[0].data());
                 }
                 else{
 
                     setUser(null);
-                    console.log("hello")
+                    
                 }
 
         }
@@ -57,6 +56,7 @@ const AddUser = () => {
                   await updateDoc(doc(userChatsRef,user.id),{
                     chats:arrayUnion({
                         chatId:newChatref.id,
+                        isSeen:false,
                     lastMessage:"say Hello!",
                     receiverId: userDetails.id,
                     updatedAt:Date.now(),
@@ -82,7 +82,7 @@ const AddUser = () => {
         }
     }
   return (
-    <div className="absolute min-w-[20%] border border-black top-32 z-40 flex flex-col p-4 bg-gray-700 rounded-lg shadow-black shadow-lg   "   >
+    <div className="absolute min-w-[20%] border border-black top-40 z-40 flex flex-col p-4 bg-gray-700 rounded-lg shadow-black shadow-lg   "   >
        <form>
        <input ref={name} type='text' placeholder='search  ' className='px-3 rounded-xl mb-4 h-9 '  />
         <button onClick={handleSearch}>

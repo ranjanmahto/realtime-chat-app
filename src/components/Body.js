@@ -77,7 +77,7 @@ function Body() {
       return (
       <div className="text-3xl font-bold bg-gray-400 h-[100vh] w-[100vw] text-center z-50 text-black flex justify-center items-center" >
 
-        {console.log("loading...")}
+      
 
 
         Loading....
@@ -94,8 +94,7 @@ function Body() {
         
         
 
-        {console.log("helllo")};
-        {console.log(userDetails)}
+       
 
           {userDetails?<ChatPage/>: <LoginPage/> }
                
