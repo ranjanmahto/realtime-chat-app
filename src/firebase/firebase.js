@@ -8,7 +8,7 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCLNX4D7FbqH47hyr8zQgHJuc9rfaxVOik",
+  apiKey: process.env.REACT_APP_API_KEY,
   authDomain: "newchat-app-fcf52.firebaseapp.com",
   projectId: "newchat-app-fcf52",
   storageBucket: "newchat-app-fcf52.appspot.com",
