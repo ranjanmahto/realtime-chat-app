@@ -9,7 +9,7 @@ import { toggleShowAddUser } from '../utils/displaySlice';
 
 
 const SecondSection = () => {
-  console.log("second section")
+
 
   const dispatch= useDispatch();
   const [chats,setChats]= useState([]);

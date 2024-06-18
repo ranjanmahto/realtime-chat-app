@@ -11,7 +11,7 @@ import NoChats from './NoChats'
 
 
 const ChatPage = () => {
-  console.log("chat page")
+  // console.log("chat page")
  
   const navigate= useNavigate();
 
@@ -30,7 +30,7 @@ const ChatPage = () => {
   if(!userDetails)
     {
       return <div>
-        {console.log("reloding")}
+        {/* {console.log("reloding")} */}
         <h1> Redirecting to login page</h1>
       </div>
     }

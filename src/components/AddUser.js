@@ -7,10 +7,29 @@ import { useSelector } from 'react-redux';
 const AddUser = () => {
     const [user,setUser]= useState(null);
     const {userDetails}= useSelector((store)=>store.user);
-    const showAddUser= useSelector((store)=>store.display.showAddUser);
+    const [filteredChats,setFilteredChats]= useState(null);
+    
+
 
     
     const name= useRef();
+
+    const handleOnChnage= (e)=>{
+      
+
+
+        if(e.target.value==="")
+            {
+                setFilteredChats(user);
+            }
+            else
+            {
+                const data= user.filter((u)=>u.data().name.toLowerCase().includes(e.target.value.toLowerCase()));
+                setFilteredChats(data);
+            }
+
+
+    }
 
     const handleSearch= async ()=>{
         
@@ -27,12 +46,15 @@ const AddUser = () => {
             if(!querySnapshot.empty)
                 {
                    
+                    setFilteredChats(querySnapshot.docs);
                    setUser(querySnapshot.docs);
+                  
                    
                 }
                 else{
 
                     setUser(null);
+                    
                     
                 }
 
@@ -44,9 +66,9 @@ const AddUser = () => {
         
     }
 
-    useEffect(()=>{
-        handleSearch();
-    })
+   useEffect(()=>{
+    handleSearch();
+   },[])
 
     const handleAdd= async (u)=>{
 
@@ -89,20 +111,27 @@ const AddUser = () => {
 
         }
     }
+   
+
+    
   return (
     <div className="absolute min-w-[20%] border border-black top-30 z-40 flex flex-col p-4 bg-blue-950 rounded-lg shadow-black shadow-lg   "    >
-       <form className="flex justify-between items-baseline"  >  
-       <input ref={name} type='text' placeholder='search  ' className='px-3 rounded-xl mb-4 h-9 '  />
-        <button  className="p-2 bg-blue-300 rounded-2xl  " >
+       <form className="flex justify-between items-baseline" onSubmit={(e)=>{
+        e.preventDefault();
+       }}  >  
+       <input ref={name} type='text' placeholder='search  ' className='px-3 rounded-xl mb-4 h-9' onChange={handleOnChnage} />
+        {/* <button  className="p-2 bg-blue-300 rounded-2xl  " onClick={(e)=>{
+            e.preventDefault();
+        }}  >
             Search
-        </button>
+        </button> */}
        </form>
         {user&& <div className='flex flex-col gap-4' >
             <div className="flex  gap-3 flex-col max-h-60 overflow-x-scroll no-scrollbar " >
                 
-                {user.map((u)=><div className="flex justify-between my-2" >  <div className="flex gap-5" >
-                    <img src={u.data().imgURL|| avatar} className='w-9 h-9 rounded-full'/>
-                    <span className="text-white font-serif" >{u.data().name}</span>
+                {filteredChats.map((u)=><div className="flex justify-between my-2" >  <div className="flex gap-5" >
+                    <img src={u.data()?.imgURL|| avatar} className='w-9 h-9 rounded-full'/>
+                    <span className="text-white font-serif" >{u.data()?.name}</span>
                 </div>
 
 

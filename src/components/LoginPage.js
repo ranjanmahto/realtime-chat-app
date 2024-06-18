@@ -15,7 +15,7 @@ import ReactLoading from 'react-loading';
 
 
 const LoginPage = () => {
-  console.log("login page start");
+  // console.log("login page start");
 
 
   
@@ -45,8 +45,7 @@ const LoginPage = () => {
       else
       {
 
-        console.log("uid present");
-        console.log(uid)
+       
 
         
         
@@ -54,7 +53,7 @@ const LoginPage = () => {
               const docRef =doc(db,"users",uid);
              
               const docSnap = await getDoc(docRef);
-              console.log(docSnap.data());
+            
              
               const data= docSnap.data();
              
@@ -91,9 +90,7 @@ const LoginPage = () => {
      if(!logIn)
       {
        try{
-        console.log(
-          "create account"
-        )
+        
         setLoading(true);
         
         const user= await createUserWithEmailAndPassword(auth, email, password);
@@ -159,7 +156,7 @@ const LoginPage = () => {
     
   }
   useEffect(()=>{
-    console.log("login useeffect")
+   
     const unsub= onAuthStateChanged(auth,async(user)=>
       {
    
@@ -168,8 +165,7 @@ const LoginPage = () => {
        
 
         dispatch(fetchUserDetails({details,loading}));
-        console.log("details");
-        console.log(details)
+      
         if(details)
           {
             navigate("/chat");
