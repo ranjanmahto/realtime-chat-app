@@ -10,10 +10,11 @@ const userSlice= createSlice({
         
     },
     reducers:{
-        fetchUserDetails:  (state,action)=>
+        fetchUserDetails:(state,action)=>
         {
            
            const {details,loading}= action.payload;
+           
           
           
            state.userDetails= details;

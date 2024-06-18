@@ -19,23 +19,26 @@ const ChatNavbar = () => {
   const {user,isReceiverBlocked, isCurrentUserBlocked}= useSelector((store)=>store.chat);
   
   return (
-    <div className="h-[10%] bg-slate-100  rounded-t-3xl rounded-tl-none flex justify-between w-[100%]" >
+    <div className="h-[10%] bg-slate-100  rounded-t-3xl rounded-tl-none flex justify-between items-center w-[100%]" >
       
          
-          <div className="mt-2 flex justify-center items-center ml-2 gap-5 w-[20%] " >
-                  <img src={user.imgURL} alt='profile' className="w-9 h-9 rounded-full object-cover" />
+          <div className="mt-[0.2%] flex justify-center items-center ml-[5%] gap-5 w-[20%] h-[5%] " >
+                  <img src={user.imgURL} alt='profile' className="w-[22%]  rounded-full object-cover h-[2.3rem] "/>
 
-                  <div className="text-black" >
+                  <div className="text-black w-[79%] h[100%] " >
                       <p className="font-bold text-md" >{(isReceiverBlocked|| isCurrentUserBlocked)?"User":user.name}</p>
                       <p className="font-normal text-xs" >{(isReceiverBlocked|| isCurrentUserBlocked)?"":"online"}</p>
                   </div>
           </div>
+          
+          <i class="fa-solid fa-ellipsis fa-2xl w-20 cursor-pointer " onClick={handleMore} ></i>
 
-          <div className="flex text-black w-[40%] justify-evenly items-center relative">
-                  <img src={phone} alt="phone" className="w-[9%] h-[40%]  rounded-full object-cover brightness-50 " />
-                  <img src={video} alt="phone" className=" w-[10%] h-[43%] object-cover brightness-50 " />
-                  <img src={more} alt="phone" className="w-[9%] h-[43%] object-cover brightness-50 cursor-pointer " onClick={handleMore} />
-          </div>
+
+
+          
+                  
+                  {/* <img src={more} alt="phone" className="w-[5%] h-[50%] object-cover brightness-50 cursor-pointer " onClick={handleMore} /> */}
+          
         
     </div>
   )

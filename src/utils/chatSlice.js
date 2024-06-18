@@ -16,13 +16,13 @@ const chatSlice= createSlice({
 
             const {chatId,user,currentUser}= action.payload;
 
-            console.log("change chat")
+            // console.log("change chat")
                        
                     
             
             if((user?.blocked.includes(currentUser?.id)))
                 {
-                    console.log("Blocked")
+                    // console.log("Blocked")
                     state.chatId= chatId;
                        state.user= user;
                     
@@ -34,7 +34,7 @@ const chatSlice= createSlice({
 
                else if((currentUser?.blocked.includes(user?.id)))
                     {
-                        console.log("blocked")
+                        // console.log("blocked")
 
                         state.chatId= chatId;
                        state.user= user;
@@ -43,7 +43,7 @@ const chatSlice= createSlice({
                        state.isReceiverBlocked= true;
                     }
                     else{
-                        console.log("not blocked")
+                        // console.log("not blocked")
                         state.chatId= chatId;
                        state.user= user;
                        
@@ -54,7 +54,7 @@ const chatSlice= createSlice({
         },
 
         toggleBlock:(state)=>{
-            console.log("toggleblock")
+            // console.log("toggleblock")
             state.isReceiverBlocked= !state.isReceiverBlocked;
         }
         

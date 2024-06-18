@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 const ChatMessage = () => {
   const {showMoreOption}= useSelector((store)=>store.display)
   
-  console.log(showMoreOption);
+ 
   useEffect(()=>{
 
   },[showMoreOption])

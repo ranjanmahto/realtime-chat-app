@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeChat } from '../utils/chatSlice';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
+import avatar from "../images/avatar.png"
 
 const Chat = ({chat}) => {
 
@@ -21,12 +22,12 @@ const Chat = ({chat}) => {
                   {
                     const userChatsData= userChatsSnapshot.data();
                     
-                    console.log(userChatsData)
+                    
 
                     const chatIndex= userChatsData.chats.findIndex(
                       (c)=>c.chatId== chat.chatId
                     );
-                    console.log(userChatsData.chats[chatIndex])
+                    
 
                    
                     userChatsData.chats[chatIndex].isSeen =true;
@@ -42,11 +43,14 @@ const Chat = ({chat}) => {
   }
 
  
+
+ 
   return (
 
-    <div className="flex justify-between items-center  hover:bg-slate-100 px-2 py-2 rounded-3xl hover:scale-[1.011] duration-[0.2s] hover:shadow-xl w-[100%] " onClick={handleChatClick} style={{backgroundColor:(chat?.isSeen ===false?"green":"transparent")}}  >
+    <div className="flex justify-between items-center  hover:bg-slate-100 px-2 py-2 rounded-xl  hover:scale-[1.011] duration-[0.2s] hover:shadow-xl w-[100%]  " onClick={handleChatClick} style={{backgroundColor:(chat?.isSeen ===false?"green":"transparent")}}  >
                                 <div className="flex  items-center  " >
-                                    <img src={chat.imgURL} className="w-8 h-8 rounded-full object-cover"/>
+
+                                    <img src={chat?.imgURL|| avatar } className="w-8 h-8 rounded-full object-cover"/>
                                     <div className="flex flex-col  h-[100%] ml-4 " >
                                         <p className="font-bold text-[105%] " >{chat.name}</p>
                                         <p className="text-[80%] " >{chat.lastMessage}</p>
@@ -62,3 +66,7 @@ const Chat = ({chat}) => {
 }
 
 export default Chat
+
+
+
+

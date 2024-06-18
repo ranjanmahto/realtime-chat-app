@@ -8,12 +8,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: "reactchat-app-b1339.firebaseapp.com",
-  projectId: "reactchat-app-b1339",
-  storageBucket: "reactchat-app-b1339.appspot.com",
-  messagingSenderId: "888283122945",
-  appId: "1:888283122945:web:42257b5b282cb2dad49f00"
+  apiKey: "AIzaSyCLNX4D7FbqH47hyr8zQgHJuc9rfaxVOik",
+  authDomain: "newchat-app-fcf52.firebaseapp.com",
+  projectId: "newchat-app-fcf52",
+  storageBucket: "newchat-app-fcf52.appspot.com",
+  messagingSenderId: "749268307645",
+  appId: "1:749268307645:web:2e729755000c3dc33331d4"
 };
 
 // Initialize Firebase

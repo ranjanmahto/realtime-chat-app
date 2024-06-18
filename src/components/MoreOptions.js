@@ -17,17 +17,17 @@ const MoreOptions = () => {
    
 
     const handleBlock= async()=>{
-        console.log("blocked start")
+      
 
         const userDocRef=  doc(db,'users',currentUser?.id);
-        console.log("after ref")
+
 
         try{
-          console.log("inside try")
+          // console.log("inside try")
             await updateDoc(userDocRef,{
                 blocked: isReceiverBlocked? arrayRemove(user?.id):arrayUnion(user?.id)
             });
-            console.log("after await")
+            // console.log("after await")
 
             dispatch(toggleBlock())
                

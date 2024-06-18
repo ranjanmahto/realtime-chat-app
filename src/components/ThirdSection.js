@@ -9,7 +9,7 @@ const ThirdSection = () => {
 
  
   return (
-    <div className=" w-[65%] bg-transparent   " >
+    <div className=" w-[74%] bg-transparent   " >
 
                  
 

@@ -7,6 +7,9 @@ import store from './utils/store';
 import Body from './components/Body';
 
 function App() {
+
+
+  
   
   
 
@@ -19,7 +22,9 @@ function App() {
         
         <Provider store={store}>
 
-              <Body/>
+            <Body/>
+
+              
                
         </Provider>
 

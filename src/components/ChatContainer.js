@@ -29,7 +29,7 @@ const ChatContainer = () => {
    },[chat])
    
   return (
-    <div className="flex flex-col gap-3 overflow-y-scroll no-scrollbar ">
+    <div className="flex flex-col gap-1 overflow-y-scroll no-scrollbar ">
     
     
       

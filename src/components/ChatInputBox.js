@@ -105,14 +105,14 @@ const ChatInputBox = () => {
         catch(err)
         {
           
-          console.log(err)
+         
         }
     }
 
 
     if(isReceiverBlocked || isCurrentUserBlocked)
       {
-        {console.log("no chats")}
+       
         return (
           
           <div className="border-t-gray-400 p-2  px-3 flex justify-center items-center " >
@@ -122,7 +122,7 @@ const ChatInputBox = () => {
           </div>
         )
       }
-      console.log("yes chats")
+     
   return (
     
 
@@ -153,7 +153,7 @@ const ChatInputBox = () => {
                </div>
                
              </div>
-             <button className="rounded-xl bg-[#5183fe] px-2 py-1" onClick={handleSend} >
+             <button className="rounded-xl bg-[#5183fe] px-2 py-1 hover:bg-blue-400 " onClick={handleSend} >
                 Send
              </button>
 
