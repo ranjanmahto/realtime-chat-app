@@ -13,12 +13,14 @@ const ChatInputBox = () => {
     const [Message,setMessage]= useState("");
     const {chatId,user,isReceiverBlocked, isCurrentUserBlocked}= useSelector((store)=>store.chat)
     
+    
     const {userDetails}= useSelector((store)=>store.user)
     const [media,setMedia]= useState({
       file:null,
       url:null,
     })
     useEffect(()=>{
+      
 
     },[isReceiverBlocked])
 
@@ -39,7 +41,7 @@ const ChatInputBox = () => {
     }
     const handleSend= async(e)=>{
       e.preventDefault();
-      if(Message==="" && media.url==null )
+      if(Message==="" && media.url==null)
         {
           return;
         }
@@ -115,7 +117,7 @@ const ChatInputBox = () => {
        
         return (
           
-          <div className="border-t-gray-400 p-2  px-3 flex justify-center items-center " >
+          <div className=" p-2  px-3 flex justify-center items-center " >
 
                <p className='text-lg text-gray-600' >You Can't Send any Message</p>
               
@@ -127,24 +129,24 @@ const ChatInputBox = () => {
     
 
     
-    <form className=" flex justify-between items-center border border-t-gray-400 p-2   px-3 "  onSubmit={handleSend}>
+    <form className=" flex justify-between items-center  p-2   px-3 "  onSubmit={handleSend}>
              
              <div className="flex gap-5 items-baseline" >
-             <i class="fa-solid fa-camera cursor-pointer"  ></i>
-             <i class="fa-solid fa-microphone cursor-pointer"></i>
+             <i class="fa-solid fa-camera  cursor-pointer text-white "  ></i>
+             <i class="fa-solid fa-microphone cursor-pointer text-white  "></i>
                     <label htmlFor='file'>
-                    <i class="fa-solid fa-image cursor-pointer "></i>
+                    <i class="fa-solid fa-image cursor-pointer text-white  "></i>
                     </label>
                    
                     
                     <input type='file' id='file' style={{display:"none"}} onChange={handleMedia} />
              </div>
 
-             <input type='text' placeholder='Type your message' value={Message} onChange={(e)=>{
+             <input type='text' placeholder='Type your message' value={Message}   onChange={(e)=>{
                 setMessage(e.target.value);
-             }}  className="bg-transparent outline-none  border-none text-black px-2 w-[70%] pb-2  "  />
+             }}  className="bg-transparent outline-none  border-none  px-2 w-[70%] pb-2 text-white font-serif  "  />
              <div className="mx-3 relative " >
-               <i className="fa-regular fa-face-smile cursor-pointer  mr-2 " onClick={()=>{
+               <i className="fa-regular fa-face-smile cursor-pointer  mr-2 text-white  " onClick={()=>{
                 setEmojiClicked(!EmojiClicked);
                }}  ></i>
                

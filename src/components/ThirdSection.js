@@ -9,7 +9,7 @@ const ThirdSection = () => {
 
  
   return (
-    <div className=" w-[74%] bg-transparent   " >
+    <div className=" w-[74%] bg-transparent border rounded-3xl rounded-b-none border-gray-600 rounded-l-none   " >
 
                  
 

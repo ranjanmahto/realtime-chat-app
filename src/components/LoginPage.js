@@ -15,7 +15,7 @@ import ReactLoading from 'react-loading';
 
 
 const LoginPage = () => {
-  console.log("login page start")
+  console.log("login page start");
 
 
   
@@ -23,11 +23,14 @@ const LoginPage = () => {
   
   const [logIn,setLogIn]= useState(false);
   const [loading,setLoading]= useState(false);
-  const email= useRef();
-  const password= useRef();
-  const name= useRef();
+  
   const dispatch= useDispatch();
-  const {userDetails,isLoading}= useSelector((store)=>store.user);
+  const {isLoading}= useSelector((store)=>store.user);
+  const [email,setEmail]= useState("");
+  const [password,setPassword]= useState("");
+  const [name,setName]= useState("");
+
+  
 
   const fetchDetails= async(uid)=>{
     if(!uid)
@@ -43,11 +46,12 @@ const LoginPage = () => {
       {
 
         console.log("uid present");
+        console.log(uid)
 
         
         
           
-              const docRef =doc(db, "users", uid);
+              const docRef =doc(db,"users",uid);
              
               const docSnap = await getDoc(docRef);
               console.log(docSnap.data());
@@ -83,7 +87,7 @@ const LoginPage = () => {
   }
 
   const handleSignIn= async (e)=>{
-    e.preventDefault();
+    
      if(!logIn)
       {
        try{
@@ -91,17 +95,14 @@ const LoginPage = () => {
           "create account"
         )
         setLoading(true);
-        const user= await createUserWithEmailAndPassword(auth, email.current.value, password.current.value);
-        const imgURL= await upload(image.file);
-       
-
-
         
-
+        const user= await createUserWithEmailAndPassword(auth, email, password);
+        const imgURL= await upload(image.file);
+        
        await setDoc(doc(db,"users",user.user.uid),
        {
-          name: name.current.value,
-          email:email.current.value,
+          name: name,
+          email:email,
           imgURL:imgURL,
           id: user.user.uid,
           blocked:[],
@@ -131,7 +132,7 @@ const LoginPage = () => {
       {
              try{
               setLoading(true);
-              await signInWithEmailAndPassword(auth,email.current.value,password.current.value);
+              await signInWithEmailAndPassword(auth,email,password);
               
               toast.success("Login Successfully");
           
@@ -158,6 +159,7 @@ const LoginPage = () => {
     
   }
   useEffect(()=>{
+    console.log("login useeffect")
     const unsub= onAuthStateChanged(auth,async(user)=>
       {
    
@@ -168,14 +170,16 @@ const LoginPage = () => {
         dispatch(fetchUserDetails({details,loading}));
         console.log("details");
         console.log(details)
-        if(user)
+        if(details)
           {
             navigate("/chat");
           }
         
         
        
-     })
+     });
+
+     return ()=> unsub();
 
      
    
@@ -205,7 +209,7 @@ const LoginPage = () => {
   return (
     <>
     
-        <div className="left w-[100%] h-[100%] bg-[#111827] flex flex-col justify-center items-center">
+        <div className="left w-[100%] h-[100%] bg-black flex flex-col justify-center  inset-0 -z-10  items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]">
           <Notification/>
             
 
@@ -222,16 +226,27 @@ const LoginPage = () => {
 
                         </label>
                         <input disabled={loading} type='file' id='file' name='file' style={{display:"none"}} onChange={handleProfileUpload} /> </>}
-                    <div className="flex flex-col gap-3 " >
-                        {!logIn && <input ref={name} disabled={loading} type='text' placeholder='Name' className='border border-gray-500 h-12 w-80 rounded-lg p-3 ' />}
-                        <input disabled={loading} ref={email} type='text' placeholder='Email' className='border border-gray-500 h-12 w-80 rounded-lg p-3 ' />
-                        <input disabled={loading} ref={password} type='text' placeholder='Password' className='border border-gray-500 h-12 w-80 rounded-lg p-3 ' />
+                    <div className="flex flex-col gap-3 outline-none " >
+                        {!logIn && <input disabled={loading} type='text' placeholder='Name' className='border border-gray-500 h-12 w-80 rounded-lg p-3 outline-none ' onChange={(e)=>{
+                          setName(e.target.value);
+                        }} />}
+                        <input disabled={loading}  type='text' placeholder='Email' className='border border-gray-500 h-12 w-80 rounded-lg p-3 outline-none '   onChange={(e)=>{
+                          setEmail(e.target.value);
+                        }} />
+                        <input disabled={loading}  type='text' placeholder='Password' className='border border-gray-500 h-12 w-80 rounded-lg p-3 outline-none'  onChange={(e)=>{
+                          setPassword(e.target.value);
+                        }} />
                        
                     </div>
-                    <button className=" w-[15rem] py-2  rounded-lg    font-semibold text-white  mt-5  bg-green-400 text-lg disabled:bg-blue-500 " onClick={handleSignIn} disabled={loading} >
+                    <button className=" w-[15rem] py-2  rounded-lg    font-semibold text-white  mt-5   text-lg  " onClick={handleSignIn} disabled={loading} >
 
                                 
-                     {logIn?"LogIn":"Create Account"}
+                                          <a href="#_" class="relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md">
+                      <span class="w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
+                      <span class="relative px-6 py-3 transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400">
+                      <span class="relative text-white">{logIn?"Log In":"Create Account"}</span>
+                      </span>
+                      </a>
                     </button>
 
                     <button onClick={()=>{
@@ -253,3 +268,8 @@ const LoginPage = () => {
 }
 
 export default LoginPage
+
+{/* <div class="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div> */}
+
+
+

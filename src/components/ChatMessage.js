@@ -15,7 +15,7 @@ const ChatMessage = () => {
   },[showMoreOption])
  
   return (
-    <div className="w-[100%] h-[90%] bg-slate-200 flex flex-col justify-end relative " >
+    <div className="w-[100%] h-[90%] bg-transparent flex flex-col justify-end relative " >
 
            {showMoreOption && <MoreOptions/>}
 

@@ -23,7 +23,7 @@ function Body() {
     },
     {
       path: "/chat",
-      element:<ChatPage/>
+      element: <ChatPage/>
     },
     
     

@@ -90,7 +90,7 @@ const AddUser = () => {
         }
     }
   return (
-    <div className="absolute min-w-[20%] border border-black top-30 z-40 flex flex-col p-4 bg-gray-700 rounded-lg shadow-black shadow-lg   "    >
+    <div className="absolute min-w-[20%] border border-black top-30 z-40 flex flex-col p-4 bg-blue-950 rounded-lg shadow-black shadow-lg   "    >
        <form className="flex justify-between items-baseline"  >  
        <input ref={name} type='text' placeholder='search  ' className='px-3 rounded-xl mb-4 h-9 '  />
         <button  className="p-2 bg-blue-300 rounded-2xl  " >
@@ -100,9 +100,9 @@ const AddUser = () => {
         {user&& <div className='flex flex-col gap-4' >
             <div className="flex  gap-3 flex-col max-h-60 overflow-x-scroll no-scrollbar " >
                 
-                {user.map((u)=><div className="flex justify-between my-2" >  <div className="flex gap-2" >
+                {user.map((u)=><div className="flex justify-between my-2" >  <div className="flex gap-5" >
                     <img src={u.data().imgURL|| avatar} className='w-9 h-9 rounded-full'/>
-                    <span>{u.data().name}</span>
+                    <span className="text-white font-serif" >{u.data().name}</span>
                 </div>
 
 

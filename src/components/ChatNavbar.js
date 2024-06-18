@@ -19,19 +19,19 @@ const ChatNavbar = () => {
   const {user,isReceiverBlocked, isCurrentUserBlocked}= useSelector((store)=>store.chat);
   
   return (
-    <div className="h-[10%] bg-slate-100  rounded-t-3xl rounded-tl-none flex justify-between items-center w-[100%]" >
+    <div className="h-[10%] bg-transparent  rounded-t-3xl rounded-tl-none flex justify-between items-center w-[100%] rounded-r-3xl border border-b-gray-600 border-t-0 border-r-0 border-l-0" > 
       
          
-          <div className="mt-[0.2%] flex justify-center items-center ml-[5%] gap-5 w-[20%] h-[5%] " >
-                  <img src={user.imgURL} alt='profile' className="w-[22%]  rounded-full object-cover h-[2.3rem] "/>
+          <div className="mt-[0.2%] flex justify-center items-center ml-[5%] gap-5 w-[20%] h-[5%]" >
+                  <img src={user.imgURL} alt='profile' className="w-[22%]  rounded-full object-cover h-[2.3rem]"/>
 
                   <div className="text-black w-[79%] h[100%] " >
-                      <p className="font-bold text-md" >{(isReceiverBlocked|| isCurrentUserBlocked)?"User":user.name}</p>
-                      <p className="font-normal text-xs" >{(isReceiverBlocked|| isCurrentUserBlocked)?"":"online"}</p>
+                      <p className="font-bold text-md text-white " >{(isReceiverBlocked|| isCurrentUserBlocked)?"User":user.name}</p>
+                      <p className="font-normal text-xs text-white " >{(isReceiverBlocked|| isCurrentUserBlocked)?"":"online"}</p>
                   </div>
           </div>
           
-          <i class="fa-solid fa-ellipsis fa-2xl w-20 cursor-pointer " onClick={handleMore} ></i>
+          <i class="fa-solid fa-ellipsis fa-2xl w-20 cursor-pointer text-white " onClick={handleMore} ></i>
 
 
 

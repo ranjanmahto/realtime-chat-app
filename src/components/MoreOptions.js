@@ -25,11 +25,11 @@ const MoreOptions = () => {
         try{
           // console.log("inside try")
             await updateDoc(userDocRef,{
-                blocked: isReceiverBlocked? arrayRemove(user?.id):arrayUnion(user?.id)
+                blocked: isReceiverBlocked?arrayRemove(user?.id):arrayUnion(user?.id)
             });
             // console.log("after await")
 
-            dispatch(toggleBlock())
+            dispatch(toggleBlock());
                
              
             
