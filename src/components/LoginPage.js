@@ -53,7 +53,7 @@ const LoginPage = () => {
               const docRef =doc(db,"users",uid);
              
               const docSnap = await getDoc(docRef);
-            
+              
              
               const data= docSnap.data();
              
@@ -212,7 +212,7 @@ const LoginPage = () => {
                <form className="flex flex-col justify-center items-center w-96  rounded-xl p-4  " onSubmit={(e)=>{
                 e.preventDefault();
                }} >
-                    <p className="font-bold  text-3xl text-white mb-8  " >{logIn?"Log In Here":" Register Now"}</p>
+                    <p className="font-bold  text-3xl text-white mb-8 font-serif  " >{logIn?"Log In Here":" Register Now"}</p>
                     { !logIn && <><label disabled={loading} htmlFor='file' >
                         
                           <img src={image.url || profile} className="h-28 w-28 rounded-full  my-5 cursor-pointer object-cover  x-8 hover:bg-white  "  />
@@ -240,7 +240,7 @@ const LoginPage = () => {
                                           <a href="#_" class="relative p-0.5 inline-flex items-center justify-center font-bold overflow-hidden group rounded-md">
                       <span class="w-full h-full bg-gradient-to-br from-[#ff8a05] via-[#ff5478] to-[#ff00c6] group-hover:from-[#ff00c6] group-hover:via-[#ff5478] group-hover:to-[#ff8a05] absolute"></span>
                       <span class="relative px-6 py-3 transition-all ease-out bg-gray-900 rounded-md group-hover:bg-opacity-0 duration-400">
-                      <span class="relative text-white">{logIn?"Log In":"Create Account"}</span>
+                      <span class="relative text-white font-serif ">{logIn?"Log In":"Create Account"}</span>
                       </span>
                       </a>
                     </button>

@@ -16,7 +16,7 @@ const chatSlice= createSlice({
 
             const {chatId,user,currentUser}= action.payload;
 
-            // console.log("change chat")
+          
                        
                     
             
@@ -54,7 +54,7 @@ const chatSlice= createSlice({
         },
 
         toggleBlock:(state)=>{
-            // console.log("toggleblock")
+         
             state.isReceiverBlocked= !state.isReceiverBlocked;
         }
         

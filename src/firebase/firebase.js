@@ -3,18 +3,20 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: "newchat-app-fcf52.firebaseapp.com",
-  projectId: "newchat-app-fcf52",
-  storageBucket: "newchat-app-fcf52.appspot.com",
-  messagingSenderId: "749268307645",
-  appId: "1:749268307645:web:2e729755000c3dc33331d4"
+  apiKey: "AIzaSyC4_XRE2H_o5_89wpDYTJTKHxogbGB6Qv4",
+  authDomain: "real-time-chat-app-909d5.firebaseapp.com",
+  projectId: "real-time-chat-app-909d5",
+  storageBucket: "real-time-chat-app-909d5.appspot.com",
+  messagingSenderId: "720151552534",
+  appId: "1:720151552534:web:a16b0b2f852f50e478cb37"
 };
+
+// Initialize Firebase
+// const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase
  export const app = initializeApp(firebaseConfig);
